@@ -357,7 +357,6 @@ class FlxSliceSprite extends FlxStrip
 		{
 			renderSprite.x = x;
 			renderSprite.y = y;
-			renderSprite.scale.copyFrom(scale);
 			renderSprite.scrollFactor.set(scrollFactor.x, scrollFactor.y);
 			renderSprite.cameras = cameras;
 			renderSprite.draw();
@@ -385,6 +384,10 @@ class FlxSliceSprite extends FlxStrip
 	
 	override function set_alpha(Alpha:Float):Float
 	{
+		if (alpha == Alpha)
+		{
+			return Alpha;
+		}
 		var newAlpha:Float = super.set_alpha(Alpha);
 		
 		if (FlxG.renderBlit && renderSprite != null)
@@ -397,7 +400,7 @@ class FlxSliceSprite extends FlxStrip
 			for (i in 0...4)
 				colors[i] = c;
 		}
-		
+		regen = true;
 		return newAlpha;
 	}
 
